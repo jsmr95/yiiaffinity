@@ -24,7 +24,7 @@ class GenerosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['update'],
+                'only' => ['update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
