@@ -96,7 +96,7 @@ class GenerosController extends Controller
             Yii::$app->db->createCommand()
                 ->update('generos', $generosForm->attributes, ['id' => $id])
                 ->execute();
-            Yii::$app->session->setFlash('success', 'Fila modificada correctamente.');
+            Yii::$app->session->setFlash('success', 'Género modificado correctamente.');
             return $this->redirect(['generos/index']);
         }
         return $this->render('update', [
@@ -111,6 +111,9 @@ class GenerosController extends Controller
      */
     public function actionDelete($id)
     {
+        $genero = $this->buscarGenero($id);
+        $generosForm = new GenerosForm(['attributes' => $genero]);
+
         $fila = Yii::$app->db
             ->createCommand('SELECT id
                                FROM peliculas
@@ -119,13 +122,20 @@ class GenerosController extends Controller
             ->queryOne();
         if (!empty($fila)) {
             Yii::$app->session->setFlash('error', 'Hay películas de ese género.');
-        } else {
-            Yii::$app->db->createCommand()
-            ->delete('generos', ['id' => $id])
-            ->execute();
-            Yii::$app->session->setFlash('success', 'Género borrado correctamente.');
+            return $this->redirect(['generos/index']);
         }
-        return $this->redirect(['generos/index']);
+        if ($generosForm->load(Yii::$app->request->post()) && $generosForm->validate()) {
+            Yii::$app->db->createCommand()
+                        ->delete('generos', ['id' => $id])
+                        ->execute();
+            Yii::$app->session->setFlash('success', 'Género borrado correctamente.');
+            return $this->redirect(['generos/index']);
+        }
+
+        return $this->render('delete', [
+            'generosForm' => $generosForm,
+            'id' => $id,
+        ]);
     }
 
     /**
