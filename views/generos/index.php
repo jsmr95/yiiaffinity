@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['generos/delete', 'id' => $fila['id']],
                         [
                             'class' => 'btn-xs btn-danger',
-                            'data-confirm' => '¿Seguro que desea borrar el género?',
                             'data-method' => 'POST',
                         ]) ?>
                 </td>
