@@ -34,6 +34,14 @@ CREATE TABLE usuarios
   , password VARCHAR(60) NOT NULL
 );
 
+DROP TABLE IF EXISTS personas CASCADE;
+
+CREATE TABLE usuarios
+(
+    id       BIGSERIAL   PRIMARY KEY
+  , nombre    VARCHAR(150) NOT NULL
+);
+
 -- INSERT
 
 INSERT INTO usuarios (login, password)
@@ -51,3 +59,12 @@ INSERT INTO peliculas (titulo, anyo, sinopsis, duracion, genero_id)
 VALUES ('Los últimos Jedi', 2017, 'Va uno y se cae...', 204, 3)
      , ('Los Goonies', 1985, 'Unos niños encuentran un tesoro', 120, 5)
      , ('Aquí llega Condemor', 1996, 'Mejor no cuento nada...', 90, 1);
+
+INSERT INTO personas (nombre)
+VALUES ('Steven Yellow')
+    , ('Arnold SortSeneger')
+    , ('Maria de la Cruz')
+    , ('Fernando Esteso')
+    , ('Fermin Trujillo')
+    , ('Chiquito de la Calzada')
+    , ('Vin Diesel');
