@@ -47,8 +47,8 @@ class Personas extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParticipantes()
+    public function getParticipaciones()
     {
-        return $this->hasMany(Participantes::className(), ['persona_id' => 'id'])->inverseOf('persona');
+        return $this->hasMany(Participaciones::className(), ['persona_id' => 'id'])->inverseOf('persona');
     }
 }
