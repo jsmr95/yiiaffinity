@@ -63,6 +63,7 @@ class GenerosController extends Controller
 
     public function actionCreate()
     {
+        
         $genero = new Generos();
 
         if ($genero->load(Yii::$app->request->post()) && $genero->save()) {
