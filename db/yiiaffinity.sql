@@ -36,10 +36,18 @@ CREATE TABLE usuarios
 
 DROP TABLE IF EXISTS personas CASCADE;
 
-CREATE TABLE usuarios
+CREATE TABLE personas
 (
     id       BIGSERIAL   PRIMARY KEY
   , nombre    VARCHAR(150) NOT NULL
+);
+
+DROP TABLE IF EXISTS papeles CASCADE;
+
+CREATE TABLE papeles
+(
+    id       BIGSERIAL   PRIMARY KEY
+  , papel    VARCHAR(150) NOT NULL UNIQUE
 );
 
 -- INSERT
@@ -68,3 +76,9 @@ VALUES ('Steven Yellow')
     , ('Fermin Trujillo')
     , ('Chiquito de la Calzada')
     , ('Vin Diesel');
+
+INSERT INTO papeles (papel)
+VALUES ('Director')
+    , ('Actor/Actriz')
+    , ('Guionista')
+    , ('Actor de doblaje');
