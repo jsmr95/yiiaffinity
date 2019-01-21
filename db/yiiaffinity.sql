@@ -50,13 +50,6 @@ CREATE TABLE papeles
   , papel    VARCHAR(150) NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS papeles CASCADE;
-
-CREATE TABLE papeles
-(
-    id       BIGSERIAL   PRIMARY KEY
-  , papel    VARCHAR(150) NOT NULL UNIQUE
-);
 
 DROP TABLE IF EXISTS participaciones CASCADE;
 
@@ -112,5 +105,5 @@ VALUES ('Director')
     , ('Actor de doblaje');
 
 INSERT INTO participaciones (pelicula_id, persona_id, papel_id)
-VALUE (1,1,1) , (1,2,2) , (2,3,4) , (3,4,5) , (3,5,3) , (2,6,2) , (1,7,3)
-    , (2,2,1) , (1,7,3) 
+VALUES (1,1,1) , (1,2,2) , (2,3,4) , (3,4,5) , (3,5,3) , (2,6,2) , (1,7,3)
+    , (2,2,1) , (1,5,2)
