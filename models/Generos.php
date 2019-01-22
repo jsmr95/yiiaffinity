@@ -12,7 +12,7 @@ namespace app\models;
  */
 class Generos extends \yii\db\ActiveRecord
 {
-    public $cuantas; //atributo virtual
+    public $cuantas; //atributo virtual el cual cargo con el findEspecial
 
     /**
      * {@inheritdoc}
@@ -59,7 +59,8 @@ class Generos extends \yii\db\ActiveRecord
         //Se usa siempre static menos cuando accedemos a constantes o variables privades que usamos self, ya que al heredar, estas no cambian.
         return static::find()
                     ->select('generos.*, COUNT(p.id) AS cuantas')
-                    ->leftJoin('peliculas p', 'generos.id = p.genero_id')
+                    ->joinWith('peliculas p', false) //esto es lo mismo de abajo, pero no uso tablas, uso las relaciones de modelos(Arriba ya la tengo creada), False para que no haga precarga.
+                    // ->leftJoin('peliculas p', 'generos.id = p.genero_id')
                     ->groupBy('generos.id');
     }
 }
