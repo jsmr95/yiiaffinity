@@ -42,7 +42,7 @@ class GenerosController extends Controller
      */
     public function actionIndex()
     {
-        $generos = Generos::find();
+        $generos = Generos::findEspecial();
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,

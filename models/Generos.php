@@ -12,7 +12,7 @@ namespace app\models;
  */
 class Generos extends \yii\db\ActiveRecord
 {
-    private $_cuantas;
+    public $cuantas; //atributo virtual
 
     /**
      * {@inheritdoc}
@@ -54,11 +54,12 @@ class Generos extends \yii\db\ActiveRecord
         return $this->hasMany(Peliculas::className(), ['genero_id' => 'id'])->inverseOf('genero');
     }
 
-    public function getCuantas()
+    public static function findEspecial()
     {
-        if ($this->_cuantas === null) { //Para que se carge por primera vez la propiedad _cuantas y no tener que consultar cada vez que ejecutemos el metodo, se queda en caché
-            $this->_cuantas = $this->getPeliculas()->count(); //tomo la relacion de arriba
-        }
-        return $this->_cuantas;
+        //Se usa siempre static menos cuando accedemos a constantes o variables privades que usamos self, ya que al heredar, estas no cambian.
+        return static::find()
+                    ->select('generos.*, COUNT(p.id) AS cuantas')
+                    ->leftJoin('peliculas p', 'generos.id = p.genero_id')
+                    ->groupBy('generos.id');
     }
 }
