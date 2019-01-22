@@ -12,6 +12,8 @@ namespace app\models;
  */
 class Generos extends \yii\db\ActiveRecord
 {
+    private $_cuantas;
+
     /**
      * {@inheritdoc}
      */
@@ -50,5 +52,13 @@ class Generos extends \yii\db\ActiveRecord
     public function getPeliculas()
     {
         return $this->hasMany(Peliculas::className(), ['genero_id' => 'id'])->inverseOf('genero');
+    }
+
+    public function getCuantas()
+    {
+        if ($this->_cuantas === null) { //Para que se carge por primera vez la propiedad _cuantas y no tener que consultar cada vez que ejecutemos el metodo, se queda en caché
+            $this->_cuantas = $this->getPeliculas()->count(); //tomo la relacion de arriba
+        }
+        return $this->_cuantas;
     }
 }
