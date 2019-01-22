@@ -12,6 +12,15 @@ $inputOptions = [
 ];
 ?>
 
+<?php foreach ($pelicula->participaciones as $participacion): ?>
+    <dl>
+        <dt>Nombre</dt>
+        <dd><?= $participacion->persona->nombre ?></dd>
+        <dt>Papel</dt>
+        <dd><?= $participacion->papel->papel ?></dd>
+    </dl>
+<?php endforeach ?>
+
 <?php $form = ActiveForm::begin(['enableClientValidation' => false]) ?>
     <?= $form->field($pelicula, 'titulo', $inputOptions) ?>
     <?= $form->field($pelicula, 'anyo', $inputOptions) ?>
