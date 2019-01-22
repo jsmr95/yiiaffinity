@@ -72,6 +72,9 @@ class Peliculas extends \yii\db\ActiveRecord
         return $this->hasOne(Generos::className(), ['id' => 'genero_id'])->inverseOf('peliculas');
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPersonas()
     {
         return $this->hasMany(Personas::class, ['id' => 'persona_id'])->via('participaciones');
