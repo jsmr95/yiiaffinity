@@ -74,5 +74,6 @@ class Peliculas extends \yii\db\ActiveRecord
 
     public function getPersonas()
     {
+        return $this->hasMany(Personas::class, ['id' => 'persona_id'])->via('participaciones');
     }
 }
