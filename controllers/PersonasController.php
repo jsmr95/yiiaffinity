@@ -92,14 +92,13 @@ class PersonasController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $persona = $this->buscarPersona($id);
+        if ($persona->load(Yii::$app->request->post()) && $persona->save()) {
+            Yii::$app->session->setFlash('success', 'Fila modificada correctamente.');
+            return $this->redirect(['personas/index']);
         }
-
         return $this->render('update', [
-            'model' => $model,
+            'persona' => $persona,
         ]);
     }
 
@@ -131,5 +130,14 @@ class PersonasController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function buscarPersona($id)
+    {
+        $persona = Personas::findOne($id);
+        if ($persona === null) {
+            throw new NotFoundHttpException('La Persona no existe.');
+        }
+        return $persona;
     }
 }
