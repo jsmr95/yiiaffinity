@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Personas;
-use app\models\PersonasSearch;
+use Yii;
+use yii\data\Pagination;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PersonasController implements the CRUD actions for Personas model.
@@ -35,18 +35,25 @@ class PersonasController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PersonasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => Personas::find()->count(),
+        ]);
+        $filas = Personas::find()
+        ->limit($pagination->limit)
+        ->offset($pagination->offset)
+        ->all();
 
+        // var_dump($filas);
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'filas' => $filas,
+            'pagination' => $pagination,
         ]);
     }
 
     /**
      * Displays a single Personas model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -64,21 +71,22 @@ class PersonasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Personas();
+        $persona = new Personas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($persona->load(Yii::$app->request->post()) && $persona->save()) {
+            Yii::$app->session->setFlash('success', 'Fila insertada correctamente.');
+            return $this->redirect(['personas/index']);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'persona' => $persona,
         ]);
     }
 
     /**
      * Updates an existing Personas model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +106,7 @@ class PersonasController extends Controller
     /**
      * Deletes an existing Personas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +120,7 @@ class PersonasController extends Controller
     /**
      * Finds the Personas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Personas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

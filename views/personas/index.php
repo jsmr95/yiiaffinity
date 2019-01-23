@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use yii\web\Link;
+
+use yii\widgets\LinkPager;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PersonasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,25 +14,39 @@ use yii\grid\GridView;
 $this->title = 'Personas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="personas-index">
+<table class="table table-striped">
+    <thead>
+        <th>Nombre</th>
+    </thead>
+    <tbody>
+        <?php foreach ($filas as $fila): ?>
+            <tr>
+                <td><?= Html::encode($fila->nombre) ?></td>
+                <td>
+                    <?= Html::a('Modificar', ['personas/update', 'id' => $fila->id], ['class' => 'btn-xs btn-info']) ?>
+                    <?= Html::a('Ver', ['personas/ver', 'id' => $fila->id], ['class' => 'btn-xs btn-warning']) ?>
+                    <?= Html::a(
+                        'Borrar',
+                        ['personas/delete', 'id' => $fila->id],
+                        [
+                            'class' => 'btn-xs btn-danger',
+                            'data-confirm' => '¿Seguro que desea borrar el género?',
+                            'data-method' => 'POST',
+                        ]) ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="row">
+    <div class="text-center">
+        <?= LinkPager::widget(['pagination' => $pagination]) ?>
+    </div>
+</div>
 
-    <p>
-        <?= Html::a('Create Personas', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'nombre',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+<div class="row">
+    <div class="text-center">
+        <?= Html::a('Insertar una nueva persona', ['personas/create'], ['class' => 'btn btn-info']) ?>
+    </div>
 </div>
