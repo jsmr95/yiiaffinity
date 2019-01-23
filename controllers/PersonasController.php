@@ -102,6 +102,14 @@ class PersonasController extends Controller
         ]);
     }
 
+    public function actionVer($id)
+    {
+        return $this->render('ver', [
+            'persona' => $this->buscarPersona($id),
+            'personas' => Personas::findAll(['id' => $id]),
+        ]);
+    }
+
     /**
      * Deletes an existing Personas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
