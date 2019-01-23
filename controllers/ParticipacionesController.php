@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Participaciones;
 use app\models\ParticipacionesSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ParticipacionesController implements the CRUD actions for Participaciones model.
@@ -46,9 +46,9 @@ class ParticipacionesController extends Controller
 
     /**
      * Displays a single Participaciones model.
-     * @param integer $pelicula_id
-     * @param integer $persona_id
-     * @param integer $papel_id
+     * @param int $pelicula_id
+     * @param int $persona_id
+     * @param int $papel_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -80,9 +80,9 @@ class ParticipacionesController extends Controller
     /**
      * Updates an existing Participaciones model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $pelicula_id
-     * @param integer $persona_id
-     * @param integer $papel_id
+     * @param int $pelicula_id
+     * @param int $persona_id
+     * @param int $papel_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -102,9 +102,9 @@ class ParticipacionesController extends Controller
     /**
      * Deletes an existing Participaciones model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $pelicula_id
-     * @param integer $persona_id
-     * @param integer $papel_id
+     * @param int $pelicula_id
+     * @param int $persona_id
+     * @param int $papel_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -118,9 +118,9 @@ class ParticipacionesController extends Controller
     /**
      * Finds the Participaciones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $pelicula_id
-     * @param integer $persona_id
-     * @param integer $papel_id
+     * @param int $pelicula_id
+     * @param int $persona_id
+     * @param int $papel_id
      * @return Participaciones the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
