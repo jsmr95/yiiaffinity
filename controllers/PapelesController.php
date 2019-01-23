@@ -72,14 +72,15 @@ class PapelesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Papeles();
+        $papel = new Papeles();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($papel->load(Yii::$app->request->post()) && $papel->save()) {
+            Yii::$app->session->setFlash('success', 'Fila insertada correctamente.');
+            return $this->redirect(['papeles/index']);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'papel' => $papel,
         ]);
     }
 
@@ -131,5 +132,14 @@ class PapelesController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function buscarPapel($id)
+    {
+        $papel = Papeles::findOne($id);
+        if ($papel === null) {
+            throw new NotFoundHttpException('El género no existe.');
+        }
+        return $papel;
     }
 }
