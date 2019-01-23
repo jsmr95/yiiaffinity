@@ -103,6 +103,14 @@ class PapelesController extends Controller
         ]);
     }
 
+    public function actionVer($id)
+    {
+        return $this->render('ver', [
+            'papel' => $this->buscarPapel($id),
+            'papeles' => Papeles::findAll(['id' => $id]),
+        ]);
+    }
+
     /**
      * Deletes an existing Papeles model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
