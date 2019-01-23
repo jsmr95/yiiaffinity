@@ -93,14 +93,13 @@ class PapelesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $papel = $this->buscarPapel($id);
+        if ($papel->load(Yii::$app->request->post()) && $papel->save()) {
+            Yii::$app->session->setFlash('success', 'Fila modificada correctamente.');
+            return $this->redirect(['papeles/index']);
         }
-
         return $this->render('update', [
-            'model' => $model,
+            'papel' => $papel,
         ]);
     }
 
