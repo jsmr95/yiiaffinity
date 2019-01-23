@@ -54,7 +54,7 @@ class Generos extends \yii\db\ActiveRecord
 
     public function getCuantas()
     {
-        if ($_cuantas === null) {
+        if ($this->_cuantas === null) {
             $this->_cuantas = Peliculas::find()->where(['genero_id' => $this->id])
                                 ->count();
         }
