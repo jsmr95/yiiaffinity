@@ -12,7 +12,7 @@ namespace app\models;
  */
 class Generos extends \yii\db\ActiveRecord
 {
-    public $cuantas; //atributo virtual el cual cargo con el findEspecial
+    private $_cuantas; //atributo virtual el cual cargo con el findEspecial
 
     /**
      * {@inheritdoc}
@@ -46,6 +46,21 @@ class Generos extends \yii\db\ActiveRecord
         ];
     }
 
+    //Solución perezosa
+    public function setCuantas($cuantas)
+    {
+        $this->_cuantas = $cuantas;
+    }
+
+    public function getCuantas()
+    {
+        if ($_cuantas === null) {
+            $this->_cuantas = Peliculas::find()->where(['genero_id' => $this->id])
+                                ->count();
+        }
+        return $this->_cuantas;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -54,7 +69,8 @@ class Generos extends \yii\db\ActiveRecord
         return $this->hasMany(Peliculas::className(), ['genero_id' => 'id'])->inverseOf('genero');
     }
 
-    public static function findEspecial()
+    //Precargar todos los 'cuantas' de todos los generos.
+    public static function findWithCuantas()
     {
         //Se usa siempre static menos cuando accedemos a constantes o variables privades que usamos self, ya que al heredar, estas no cambian.
         return static::find()
