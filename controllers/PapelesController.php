@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Papeles;
-use app\models\PapelesSearch;
+use Yii;
+use yii\data\Pagination;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PapelesController implements the CRUD actions for Papeles model.
@@ -35,18 +35,26 @@ class PapelesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PapelesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => Papeles::find()->count(),
+        ]);
+
+        $filas = Papeles::find()
+            ->orderBy('papel')
+            ->limit($pagination->limit)
+            ->offset($pagination->offset)
+            ->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'filas' => $filas,
+            'pagination' => $pagination,
         ]);
     }
 
     /**
      * Displays a single Papeles model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -78,7 +86,7 @@ class PapelesController extends Controller
     /**
      * Updates an existing Papeles model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +106,7 @@ class PapelesController extends Controller
     /**
      * Deletes an existing Papeles model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +120,7 @@ class PapelesController extends Controller
     /**
      * Finds the Papeles model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Papeles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
