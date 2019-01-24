@@ -30,3 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach ?>
     </tbody>
 </table>
+<div class="row">
+  <div class="col-sm-4">
+    <h2>Lista desplegable 1</h2>
+  </div>
+  <div class="col-sm-4">
+    <h2>Lista desplegable 2</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="text-center">
+    <?= Html::a('Añadir Participacion', ['participaciones/create'], ['class' => 'btn btn-info']) ?>
+  </div>
+</div>
