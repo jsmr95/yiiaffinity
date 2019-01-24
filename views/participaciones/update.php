@@ -33,13 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach ?>
     </tbody>
 </table>
-<?php $form = ActiveForm::begin() ?>
+<?php $form = ActiveForm::begin(['action' => ['participaciones/create']]) ?>
 <div class="row">
   <div class="col-sm-4">
     <h3>Actor/Actriz</h3>
-    <?php foreach ($personas as $persona): ?>
-      <h4><?= $persona->nombre ?></h4>
-    <?php endforeach ?>
+    <?= Html::listBox($personas, 'nombre', $personas) ?>
   </div>
   <div class="col-sm-4">
     <h3>Papel</h3>
@@ -50,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row">
   <div class="text-center">
-    <?= Html::a('Añadir Participacion', ['participaciones/create'], ['class' => 'btn btn-info']) ?>
+    <?= Html::submitButton('Añadir Participacion', ['class' => 'btn btn-primary']) ?>
     <?= Html::a('Volver', ['peliculas/ver', 'id'=>$participacion->pelicula_id], ['class' => 'btn btn-danger']) ?>
   </div>
 </div>

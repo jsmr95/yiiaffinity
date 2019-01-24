@@ -12,7 +12,10 @@ class ParticipacionesController extends \yii\web\Controller
         $participaciones = Participaciones::find()
             ->where(['pelicula_id' => $pelicula_id])
             ->all();
-        $personas = Personas::find()->all();
+        $personas = Personas::find()
+            ->select('nombre')
+            ->indexBy('id')
+            ->column();
         $papeles = Papeles::find()->all();
         return $this->render('update', [
             'pelicula' => $pelicula,
@@ -32,6 +35,18 @@ class ParticipacionesController extends \yii\web\Controller
         return $this->redirect([
             'participaciones/update',
             'pelicula_id' => $pelicula_id,
+        ]);
+    }
+    public function actionCreate()
+    {
+        // $participacion = Participaciones::findOne([
+        //     'pelicula_id' => $pelicula_id,
+        //     'persona_id' => $persona_id,
+        //     'papel_id' => $papel_id,
+        // ]);
+        // $participacion->delete();
+        return $this->redirect([
+            'peliculas/index',
         ]);
     }
 
