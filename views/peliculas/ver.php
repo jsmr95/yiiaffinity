@@ -37,3 +37,8 @@ $inputOptions = [
            <?php endforeach ?>
        </dl>
 <?php endforeach ?>
+<div class="row">
+    <div class="text-center">
+        <?= Html::a('Modificar las Participaciones', ['participaciones/update', 'pelicula_id' => $pelicula->id], ['class' => 'btn btn-info']) ?>
+    </div>
+</div>
