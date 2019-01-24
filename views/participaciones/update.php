@@ -1,6 +1,9 @@
 <?php
 use app\models\Peliculas;
 use yii\helpers\Html;
+use web\helpers\CHtml;
+use yii\widgets\ActiveForm;
+
 $this->title = 'Gestión de participaciones en una película';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -30,16 +33,25 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach ?>
     </tbody>
 </table>
+<?php $form = ActiveForm::begin() ?>
 <div class="row">
   <div class="col-sm-4">
-    <h2>Lista desplegable 1</h2>
+    <h3>Actor/Actriz</h3>
+    <?php foreach ($personas as $persona): ?>
+      <h4><?= $persona->nombre ?></h4>
+    <?php endforeach ?>
   </div>
   <div class="col-sm-4">
-    <h2>Lista desplegable 2</h2>
+    <h3>Papel</h3>
+    <?php foreach ($papeles as $papel): ?>
+      <h4><?= $papel->papel ?></h4>
+    <?php endforeach ?>
   </div>
 </div>
 <div class="row">
   <div class="text-center">
     <?= Html::a('Añadir Participacion', ['participaciones/create'], ['class' => 'btn btn-info']) ?>
+    <?= Html::a('Volver', ['peliculas/ver', 'id'=>$participacion->pelicula_id], ['class' => 'btn btn-danger']) ?>
   </div>
 </div>
+<?php ActiveForm::end() ?>

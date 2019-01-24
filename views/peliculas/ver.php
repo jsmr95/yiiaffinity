@@ -40,5 +40,6 @@ $inputOptions = [
 <div class="row">
     <div class="text-center">
         <?= Html::a('Modificar las Participaciones', ['participaciones/update', 'pelicula_id' => $pelicula->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('Volver', ['peliculas/index'], ['class' => 'btn btn-danger']) ?>
     </div>
 </div>
