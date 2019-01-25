@@ -33,19 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach ?>
     </tbody>
 </table>
-<?php $form = ActiveForm::begin(['action' => ['participaciones/create']]) ?>
+<?php $form = ActiveForm::begin(['action' => ['participaciones/create'], 'method' => 'post']);
+      Html::hiddenInput('pelicula_id' , $pelicula->id);?>
 <div class="row">
   <div class="col-sm-4">
     <h3>Actor/Actriz</h3>
-    <?= Html::listBox($personas, 'nombre', $personas) ?>
+    <?= Html::dropDownList($personas, 'persona_id', $personas) ?>
   </div>
   <div class="col-sm-4">
     <h3>Papel</h3>
-    <?php foreach ($papeles as $papel): ?>
-      <h4><?= $papel->papel ?></h4>
-    <?php endforeach ?>
+    <?= Html::dropDownList($papeles, 'papel_id', $papeles) ?>
   </div>
 </div>
+<br>
 <div class="row">
   <div class="text-center">
     <?= Html::submitButton('Añadir Participacion', ['class' => 'btn btn-primary']) ?>
