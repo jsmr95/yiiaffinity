@@ -17,8 +17,8 @@ CREATE TABLE peliculas
   , duracion  SMALLINT     DEFAULT 0
                            CONSTRAINT ck_peliculas_duracion_positiva
                            CHECK (coalesce(duracion, 0) >= 0)
-  , precio    NUMERIC(5,2) CONSTRAINT ck_peliculas_duracion_positiva
-                           CHECK (coalesce(duracion, 0) >= 0)
+  , precio    NUMERIC(5,2) CONSTRAINT ck_duracion_precio_positivo
+                           CHECK (coalesce(precio, 0) >= 0)
   , created_at TIMESTAMP   DEFAULT CURRENT_TIMESTAMP
   , genero_id BIGINT       NOT NULL
                            REFERENCES generos (id)
