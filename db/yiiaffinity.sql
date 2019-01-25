@@ -17,6 +17,9 @@ CREATE TABLE peliculas
   , duracion  SMALLINT     DEFAULT 0
                            CONSTRAINT ck_peliculas_duracion_positiva
                            CHECK (coalesce(duracion, 0) >= 0)
+  , precio    NUMERIC(5,2) CONSTRAINT ck_peliculas_duracion_positiva
+                           CHECK (coalesce(duracion, 0) >= 0)
+  , created_at TIMESTAMP   DEFAULT CURRENT_TIMESTAMP
   , genero_id BIGINT       NOT NULL
                            REFERENCES generos (id)
                            ON DELETE NO ACTION
@@ -83,10 +86,10 @@ VALUES ('Comedia')
      , ('Drama')
      , ('Aventuras');
 
-INSERT INTO peliculas (titulo, anyo, sinopsis, duracion, genero_id)
-VALUES ('Los últimos Jedi', 2017, 'Va uno y se cae...', 204, 3)
-     , ('Los Goonies', 1985, 'Unos niños encuentran un tesoro', 120, 5)
-     , ('Aquí llega Condemor', 1996, 'Mejor no cuento nada...', 90, 1);
+INSERT INTO peliculas (titulo, anyo, sinopsis, duracion, precio, genero_id)
+VALUES ('Los últimos Jedi', 2017, 'Va uno y se cae...', 204, 35, 3)
+     , ('Los Goonies', 1985, 'Unos niños encuentran un tesoro', 120, 20, 5)
+     , ('Aquí llega Condemor', 1996, 'Mejor no cuento nada...', 90, 12.50, 1);
 
 INSERT INTO personas (nombre)
 VALUES ('Steven Yellow')
