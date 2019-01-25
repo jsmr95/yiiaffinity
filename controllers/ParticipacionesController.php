@@ -6,6 +6,7 @@ use app\models\Participaciones;
 use app\models\Peliculas;
 use app\models\Personas;
 use app\models\Papeles;
+
 class ParticipacionesController extends \yii\web\Controller
 {
     public function actionUpdate($pelicula_id)
@@ -45,12 +46,11 @@ class ParticipacionesController extends \yii\web\Controller
     {
         $participacion = new Participaciones();
 
-        if ($participacion->load(Yii::$app->request->post()) ) {
+        if ($participacion->load(Yii::$app->request->post())) {
             // return $this->redirect(['peliculas/index']);
         }
         return $this->render('create', [
             'participacion' => $participacion,
         ]);
     }
-
 }
