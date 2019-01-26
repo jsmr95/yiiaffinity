@@ -46,7 +46,7 @@ class ParticipacionesController extends \yii\web\Controller
     {
         $participacion = new Participaciones();
 
-        if ($participacion->load(Yii::$app->request->post())) {
+        if ($participacion->load(Yii::$app->request->get())) {
             // return $this->redirect(['peliculas/index']);
         }
         return $this->render('create', [

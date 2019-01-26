@@ -33,8 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach ?>
     </tbody>
 </table>
-<?php $form = ActiveForm::begin(['action' => ['participaciones/create'], 'method' => 'post']);
-      Html::hiddenInput('pelicula_id' , $pelicula->id);?>
+<?php
+$inputOptions = [
+      'inputOptions' => [
+          'class' => 'form-control',
+          'readonly' => true,
+          'value' => $pelicula->id,
+          'type' => 'hidden',
+      ],
+  ];
+  $form = ActiveForm::begin(['action' => ['participaciones/create'], 'method' => 'post']);
+  $form->field($participaciones, 'pelicula_id', $inputOptions) ?>
 <div class="row">
   <div class="col-sm-4">
     <h3>Actor/Actriz</h3>
