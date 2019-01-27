@@ -21,10 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <tbody>
         <?php foreach ($filas as $fila): ?>
             <tr>
-                <td><?= Html::encode($fila->nombre) ?></td>
+                <td><?= Html::a(Html::encode($fila->nombre),['personas/ver', 'id' => $fila->id]) ?></td>
                 <td>
                     <?= Html::a('Modificar', ['personas/update', 'id' => $fila->id], ['class' => 'btn-xs btn-info']) ?>
-                    <?= Html::a('Ver', ['personas/ver', 'id' => $fila->id], ['class' => 'btn-xs btn-warning']) ?>
                     <?= Html::a(
                         'Borrar',
                         ['personas/delete', 'id' => $fila->id],
