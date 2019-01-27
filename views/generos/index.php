@@ -13,11 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <tbody>
         <?php foreach ($filas as $fila): ?>
             <tr>
-                <td><?= Html::encode($fila->genero) ?></td>
+                <td><?= Html::a(Html::encode($fila->genero), ['generos/ver', 'id' => $fila->id]) ?></td>
                 <td><?= Html::encode($fila->cuantas) ?></td>
                 <td>
                     <?= Html::a('Modificar', ['generos/update', 'id' => $fila->id], ['class' => 'btn-xs btn-info']) ?>
-                    <?= Html::a('Ver', ['generos/ver', 'id' => $fila->id], ['class' => 'btn-xs btn-warning']) ?>
                     <?= Html::a(
                         'Borrar',
                         ['generos/delete', 'id' => $fila->id],
