@@ -21,3 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach ?>
     </tbody>
 </table>
+<div class="row">
+  <div class="text-center">
+    <?= Html::a('Volver', ['generos/index'], ['class' => 'btn btn-danger']); ?>
+  </div>
+</div>
